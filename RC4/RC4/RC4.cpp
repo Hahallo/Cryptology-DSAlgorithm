@@ -1,4 +1,4 @@
-// RC4.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// RC4.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 #include "stdafx.h"
@@ -10,8 +10,8 @@ using namespace std;
 
 class RC4 {
 public:
-	vector<unsigned char> keystream;//´æ´¢ÃÜÔ¿Á÷
-	void KSA(unsigned char S[], unsigned  char K[], int Keylen)//³õÊ¼»¯
+	vector<unsigned char> keystream;//å­˜å‚¨å¯†é’¥æµ
+	void KSA(unsigned char S[], unsigned  char K[], int Keylen)//åˆå§‹åŒ–
 	{
 		char T[256] = { 0 };
 		for (int i = 0;i<256;i++)
@@ -26,7 +26,7 @@ public:
 			swap(S[i], S[j]);
 		}
 	}
-	void PRGA(unsigned char S[], int len)//²úÉúÃÜÔ¿Á÷
+	void PRGA(unsigned char S[], int len)//äº§ç”Ÿå¯†é’¥æµ
 	{
 		int i = 0, j = 0;
 		int k = 0;
@@ -36,7 +36,7 @@ public:
 			j = (j + S[i]) % 256;
 			swap(S[i], S[j]);
 			int t = (S[i] + S[j]) % 256;
-			keystream.push_back(S[t]);//´æÃÜÔ¿Á÷
+			keystream.push_back(S[t]);//å­˜å¯†é’¥æµ
 			k++;
 		}
 	}
@@ -44,20 +44,20 @@ public:
 
 int main()
 {
-	char data[512] = "ÖĞ¹úµØÖÊ´óÑ§£¨Îäºº£©";
+	char data[512] = "ä½ çš„æ»‘æ¿é‹";
 	unsigned char c[512] = { 0 };
 	unsigned char S[256] = { 0 };
-	char key[256] = "ÅíäàÑô";
+	char key[256] = "åºéº¦éƒ";
 	int Keylen = strlen(key);
 	int datalen = strlen(data);
 	strlen(key);
-	cout << "Ã÷ÎÄÎª£º" << data << endl;
-	cout << "ÃØÔ¿Îª£º" << key << endl;
+	cout << "æ˜æ–‡ä¸ºï¼š" << data << endl;
+	cout << "ç§˜é’¥ä¸ºï¼š" << key << endl;
 	RC4 test;
 	test.KSA(S, (unsigned char*)key, Keylen);
 	test.PRGA((unsigned char*)S, datalen);
 	
-	cout << "ÃÜÔ¿Á÷Îª£º" ;
+	cout << "å¯†é’¥æµä¸ºï¼š" ;
 	for (unsigned i=0;i<test.keystream.size();i++)
 	{
 		cout << test.keystream[i];
@@ -66,8 +66,8 @@ int main()
 	{
 		c[i]=  (unsigned char)data[i] ^ test.keystream[i];
 	}
-	cout << endl << "¼ÓÃÜÖ®ºóÎª:" << c << endl;
-	cout << "½âÃÜÖ®ºóÎª:";
+	cout << endl << "åŠ å¯†ä¹‹åä¸º:" << c << endl;
+	cout << "è§£å¯†ä¹‹åä¸º:";
 	for (unsigned i = 0;i < strlen(data);i++)
 	{
 		cout << (unsigned char)(c[i] ^ test.keystream[i]);
