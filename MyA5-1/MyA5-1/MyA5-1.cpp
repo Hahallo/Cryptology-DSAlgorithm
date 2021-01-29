@@ -135,7 +135,7 @@ int main()
 {
 	unsigned long key = 412;
 	int frame = 1;
-	char data[512] = "彭溧阳";
+	char data[512] = "嘿嘿嘿";
 	int len = strlen(data);
 	A5_1 test(key, frame);
 	test.run();
