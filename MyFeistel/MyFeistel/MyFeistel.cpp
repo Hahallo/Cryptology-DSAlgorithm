@@ -1,24 +1,24 @@
-// MyFeistel.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// MyFeistel.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 #include "stdafx.h"
 #include<iostream>
 using namespace std;
 
-const int Nr = 4;//ĞèÒª4ÂÖ¼ÓÃÜ
+const int Nr = 4;//éœ€è¦4è½®åŠ å¯†
 class Feistel {
 private:
 	unsigned char key[4];
 	int nr;
 public:
-	Feistel(unsigned char*keyH, int n) {//¹¹Ôìº¯Êı
+	Feistel(unsigned char*keyH, int n) {//æ„é€ å‡½æ•°
 		for (int i = 0;i < n;i++)
 		{
 			key[i] = keyH[i];
 		}
 		nr = n;
 	}
-	int change(unsigned char*p,int i)//½«×Ö·ûĞÍ×ª»¯ÎªÕûĞÎ
+	int change(unsigned char*p,int i)//å°†å­—ç¬¦å‹è½¬åŒ–ä¸ºæ•´å½¢
 	{
 		int r=0;
 		int t=1;
@@ -33,7 +33,7 @@ public:
 		return r;
 	}
 
-	int E(int p1)//R=¢Ù¢Ú¢Û¢Ü£¬ E(R) = ¢Ú¢Ù¢Ú¢Û¢Ü¢Û
+	int E(int p1)//R=â‘ â‘¡â‘¢â‘£ï¼Œ E(R) = â‘¡â‘ â‘¡â‘¢â‘£â‘¢
 	{
 		unsigned char a = (p1 >> 2) & 0x01;
 		unsigned char b = (p1 >> 3) & 0x01;
@@ -44,13 +44,13 @@ public:
 		return r;
 	}
 
-	int S(int p2)//S(¢Ù¢Ú¢Û¢Ü¢İ¢Ş)=¢Ù¢Ú¢Û¢Ü
+	int S(int p2)//S(â‘ â‘¡â‘¢â‘£â‘¤â‘¥)=â‘ â‘¡â‘¢â‘£
 	{
 		p2 >>= 2;
 		return p2;
 	}
 
-	int P(int p3)//P(¢Ù¢Ú¢Û¢Ü)= ¢Ú¢Ü¢Ù¢Û
+	int P(int p3)//P(â‘ â‘¡â‘¢â‘£)= â‘¡â‘£â‘ â‘¢
 	{
 		int a = p3 & 0x01;
 		int b = (p3 >> 1) & 0x01;
@@ -64,7 +64,7 @@ public:
 		return r;
 	}
 
-	int f(int p1,unsigned char* key)//ÂÖº¯Êıf=P(S ( E(R) + Ki)),  i=1,2,3,4 
+	int f(int p1,unsigned char* key)//è½®å‡½æ•°f=P(S ( E(R) + Ki)),  i=1,2,3,4 
 	{
 		int r = p1&0x0f;
 		int l = p1 >> 4;
@@ -92,11 +92,11 @@ public:
 };
 int main()
 {
-	unsigned char p[7] = "ÅíäàÑô";
+	unsigned char p[7] = "å˜¿å˜¿å˜¿";
 	unsigned char key[4] = { 63,56,7,0 };
 	Feistel test(key, Nr);
-	cout << "Ã÷ÎÄÎª£º" << p<<endl;
-	cout <<"ÃÜÎÄÎª£º"<<test.encription(p,7) <<endl;
+	cout << "æ˜æ–‡ä¸ºï¼š" << p<<endl;
+	cout <<"å¯†æ–‡ä¸ºï¼š"<<test.encription(p,7) <<endl;
     return 0;
 }
 
